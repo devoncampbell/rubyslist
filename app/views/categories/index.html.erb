@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="leftbar">
+    <a href="#"><h1>rubyslist</h1></a>
+    <ul>
+      <%= link_to 'Post An Ad', new_listing_path %>
+      <li>my account</li>
+    </ul>
+    <form>
+      <p>search rubyslist</p>
+      <input type="text" name="firstname" placeholder="search" size="20">
+      <br>
+      <input type="text" name="firstname" placeholder="where" size="20">
+      <br>
+      <select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+      <button type="button">>
+      </button>
+    </form>
+  </div>
+  <div class="center-column" >
+    <div class="center-one">
+      <table>
+        <tr>
+          <th class="table-header"><%= link_to 'Uniforms', category_path(@uniform)%></th>
+        </tr>
+        <tr>
+          <td>
+            <% @uniform.subcategories.each do |subcategory| %>
+            <ul>
+              <li><%= link_to subcategory.name, category_subcategory_path(@uniform, subcategory) %></li>
+            </ul>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="center-two">
+    <table>
+    <tr>
+      <th class="table-header"><%= link_to 'Textbooks', category_path(@textbook) %></th>
+    </tr>
+    <tr>
+      <td>
+        <% @textbook.subcategories.each do |subcategory| %>
+        <ul>
+        <li><%= link_to subcategory.name, category_subcategory_path(@textbook, subcategory) %></li>
+        </ul>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+    </div>
+    <div class="center-three">
+    <table>
+    <tr>
+      <th class="table-header"><%= link_to 'Tutors', category_path(@tutor) %></th>
+    </tr>
+    <tr>
+      <td>
+        <% @tutor.subcategories.each do |subcategory| %>
+        <ul>
+        <li><%= link_to subcategory.name, category_subcategory_path(@tutor, subcategory) %></li>
+        </ul>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+    </div>
+  </div>
+  <div class="rightbar">
+    <ul class="rightbar-top">
+      <li><%= link_to 'Help/FAQ', help_path %></li>
+      <li><%= link_to 'Avoid Scams & Fraud', scams_path %></li>
+    </ul>
+  </div>
+</div>
