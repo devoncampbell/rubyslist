@@ -21,7 +21,6 @@
     
       <br>
 
-<center>
 <div class="container">
   <ul class="list-margin">
     <% if @listings.present? %>
@@ -30,7 +29,7 @@
             <span>
                 <%= listing.created_at.strftime('%B %d, %Y') %>
             </span>
-                <%= link_to listing.title, listing %> (<%= listing.city %>, <%= listing.province %>)
+                <%= link_to listing.title, listing %> - (<%= listing.city %>, <%= listing.province %>)
         </li>
         <% end %>
     <% else %>
@@ -38,4 +37,3 @@
     <% end %>
   </ul>
 </div>
-</center>

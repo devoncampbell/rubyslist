@@ -1,40 +1,38 @@
+<center><a href="#"><h1>Lockr</h1></a><center>
+    <ul>
+      <% if user_signed_in? %>
+        <li><%= link_to 'My Account', edit_user_registration_path %></li>
+        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+        <li><%= link_to 'My Listings', mylistings_path %></li>
+        <li><%= link_to 'Post An Ad', new_listing_path %></li>
+
+      <% else %>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
+        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+      <% end %>
+
+    </ul>
+    
+    <%= form_tag search_listings_path, method: :get do |f| %>
+      <%= text_field_tag :search, nil, placeholder: 'What Are You Looking For?' %>
+      <%= select_tag :category, options_for_select(Category.all.map{ |c| [c.name, c.id]}) %>
+      <%= submit_tag 'Search' %>
+    <% end %>
+    
+      <br>
+
 <div class="container">
   <div>
-    <button type="button">reply</button>
-    posted 2 days ago
     <h1 class="listing-header"><%= @listing.title %></h1>
     <div class="box">
-      <p>test</p>
+    <% if @listing.user = current_user %>
+      <p><%= link_to 'Edit', edit_listing_path %></p>
+    <% end %>
     </div>
-    <p>iLorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Vestibulum varius mi vel ipsum ultrices, non volutpat nisl viverra. 
-    Sed rhoncus elementum tortor, vitae condimentum dolor. Vestibulum 
-    imperdiet velit ac fringilla pulvinar. Nunc euismod justo sit amet 
-    turpis tincidunt, id ultricies neque scelerisque. Sed ullamcorper id 
-    risus gravida pulvinar. Fusce iaculis elit orci, eget mattis quam dapibus 
-    id. Pellentesque iaculis et neque sed bibendum. Nullam hendrerit, orci 
-    laoreet sodales molestie, enim lectus posuere ligula, id ultrices eros nisl 
-    nec purus. Aliquam sit amet porttitor leo, in iaculis felis.
-
-    Duis enim est, luctus at nibh in, consequat sollicitudin purus. Curabitur 
-    posuere vulputate massa cursus interdum. Nam a imperdiet quam. Morbi 
-    lacinia, eros eget facilisis porta, ante elit rhoncus nisi, id tristique 
-    augue nibh vitae ligula. Suspendisse tincidunt non est vitae rhoncus. Nulla 
-    tincidunt tempor turpis sed rutrum. Aliquam pharetra malesuada dui, ut 
-    porttitor risus luctus at. Proin aliquam pretium accumsan.
-
-    In at elit eu purus tincidunt finibus. Morbi vestibulum lacus et nunc
-    accumsan tempor. Curabitur egestas vitae nulla sit amet pellentesque. Etiam 
-    ullamcorper efficitur felis, vel pellentesque sapien sagittis at. Lorem 
-    ipsum dolor sit amet, consectetur adipiscing elit. Proin ante dui, varius a 
-    metus quis, egestas pellentesque leo. Aliquam pellentesque rhoncus metus 
-    vitae molestie. Morbi lorem urna, cursus in maximus sit amet, maximus nec 
-    diam. Praesent quis facilisis mauris.
-    </p>
-    test
+    <p><%= @listing.description %></p>
   </div>
   <footer>
-    <p>post id</p>
-    <p>posted 2 days ago</p>
+    <p>post id: <%= @listing.id %></p>
+    <p>posted: <%= time_ago_in_words(@listing.created_at) %></p>
   </footer>
 </div>
